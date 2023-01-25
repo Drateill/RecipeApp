@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FullRecipe from './FullRecipe'
+import { useNavigation } from '@react-navigation/native';
+
 
 const FoodCard = ({ recipe }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const navigation = useNavigation();
     return (
-        <TouchableOpacity onPress={() => setIsOpen(!isOpen)}>
-{ !isOpen &&       <View style={styles.container}>
+        <TouchableOpacity onPress={() => navigation.navigate('Full Recipe', { recipe })}>
+<View style={styles.container}>
             <View style={styles.imageContainer}>
                 <Image
                     style={styles.image}
@@ -24,8 +25,7 @@ const FoodCard = ({ recipe }) => {
                     ))}
                 </View>
             </View>
-        </View>}
-              {isOpen && <FullRecipe recipe={recipe} />}
+        </View>
         </TouchableOpacity>
     );
 };
@@ -60,17 +60,17 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
     },
-    tagContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    tag: {
+    tagsContainer: {
+        display:"flex",
+        flexWrap: 'wrap',
+      },
+      tag: {
         backgroundColor: '#C5E9E2',
-        padding: 5,
         borderRadius: 20,
-        marginRight: 10,
-    },
+        padding: 5,
+        margin: 5,
+        color: '#033E32',
+      },
     tagText: {
         color: '#033E32',
         fontSize: 12,
